@@ -10,6 +10,9 @@ import {
   Platform,
 } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import firestore from '@react-native-firebase/firestore';
+import firebaseApp from '@react-native-firebase/app';
+
 
 const RegisterScreen = () => {
   const [formData, setFormData] = useState({
@@ -110,11 +113,32 @@ const RegisterScreen = () => {
     return true;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateForm()) {
-      // Handle form submission here
-      console.log('Form submitted:', formData);
-      Alert.alert('Success', 'Registration successful!');
+      try {
+        // Add data to Firestore with specified collection and field names
+        await firestore()
+          .collection('User')  // Changed to match your database name
+          .add({
+            Name: formData.name,         // Capitalized field names
+            PhoneNumber: formData.phone, // to match your database
+            Address: formData.address,
+            Email: formData.email,
+            createdAt: firestore.FieldValue.serverTimestamp(),
+          });
+
+        Alert.alert('Success', 'Registration successful!');
+        // Clear form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          address: '',
+        });
+      } catch (error) {
+        console.error('Registration error:', error);
+        Alert.alert('Error', 'Failed to register. Please try again.');
+      }
     }
   };
 
