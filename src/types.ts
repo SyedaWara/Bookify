@@ -1,5 +1,9 @@
 export type RootStackParamList = {
   Options: undefined;
+  Login: undefined;
   Register: undefined;
-  // Add other screens here
+  RegisterVenue: undefined;
+  Home: {
+    userName: string;
+  };
 }; 

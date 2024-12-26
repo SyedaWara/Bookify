@@ -9,7 +9,9 @@ const OptionsScreen = ({ navigation }: { navigation: OptionsScreenNavigationProp
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome!</Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={() => navigation.navigate('Login')}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity 
@@ -17,7 +19,9 @@ const OptionsScreen = ({ navigation }: { navigation: OptionsScreenNavigationProp
         onPress={() => navigation.navigate('Register')}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button, styles.venueButton]}>
+      <TouchableOpacity 
+        style={[styles.button, styles.venueButton]}
+        onPress={() => navigation.navigate('RegisterVenue')}>
         <Text style={styles.buttonText}>Register Your Venue</Text>
       </TouchableOpacity>
     </View>

@@ -33,6 +33,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './src/types'; // Define your stack param list
 import { enableScreens } from 'react-native-screens';
+import HomeScreen from './src/components/HomeScreen';
+import LoginScreen from './src/components/LoginScreen';
+import RegisterVenue from './src/components/RegisterVenue';
 
 enableScreens();
 
@@ -59,7 +62,10 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Options" component={OptionsScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="RegisterVenue" component={RegisterVenue} />
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

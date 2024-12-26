@@ -20,6 +20,7 @@ const RegisterScreen = () => {
     email: '',
     phone: '',
     address: '',
+    password: '',
   });
 
   const requestLocationPermission = async () => {
@@ -110,6 +111,10 @@ const RegisterScreen = () => {
       Alert.alert('Error', 'Please enter your address or use current location');
       return false;
     }
+    if (!formData.password || formData.password.length < 6) {
+      Alert.alert('Error', 'Password must be at least 6 characters');
+      return false;
+    }
     return true;
   };
 
@@ -124,6 +129,7 @@ const RegisterScreen = () => {
             PhoneNumber: formData.phone, // to match your database
             Address: formData.address,
             Email: formData.email,
+            Password: formData.password,
             createdAt: firestore.FieldValue.serverTimestamp(),
           });
 
@@ -134,6 +140,7 @@ const RegisterScreen = () => {
           email: '',
           phone: '',
           address: '',
+          password: '',
         });
       } catch (error) {
         console.error('Registration error:', error);
@@ -168,6 +175,14 @@ const RegisterScreen = () => {
         maxLength={11}
         value={formData.phone}
         onChangeText={text => setFormData(prev => ({...prev, phone: text}))}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Password (min 6 characters)"
+        secureTextEntry={true}
+        value={formData.password}
+        onChangeText={text => setFormData(prev => ({...prev, password: text}))}
       />
 
       <TextInput
